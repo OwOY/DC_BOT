@@ -4,9 +4,9 @@ import os
 
 class Connection:
     def __init__(self):
-        self.conn = self.connection()
         self.db_name = os.getenv('DB_HOST')
         self.password = os.getenv('DB_PASSWORD')
+        self.conn = self.connection()
         
     def connection(self):
         conn = pymysql.connect(
@@ -50,16 +50,13 @@ class Connection:
         return data
     
     def insert(self):
-        import os
-        i = 0
         sql = '''
             insert into sponge(name, url) values (%s, %s)
         '''
         cursor = self.conn.cursor()
-        for file in os.listdir('sponge'):
+        for file in os.listdir(r'sponge'):
             data = (file, '')
-            cursor.execute(sql, data)        
-            i+=1
+            cursor.execute(sql, data)      
         self.conn.commit()
         self.conn.close()
         

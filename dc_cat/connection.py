@@ -5,9 +5,9 @@ import os
 
 class Connection:
     def __init__(self):
-        self.conn = self.connection()
         self.db_name = os.getenv('DB_HOST')
         self.password = os.getenv('DB_PASSWORD')
+        self.conn = self.connection()
         
     def connection(self):
         conn = pymysql.connect(
